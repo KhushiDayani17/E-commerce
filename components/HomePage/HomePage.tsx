@@ -1,12 +1,14 @@
 import React from "react";
+import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 
 import styles from "./HomePage.module.scss";
 
 const HomePage = () => {
   return (
-    <div className={styles.body}>
+    <div>
       <Header />
+      <Footer/>
     </div>
   );
 };
