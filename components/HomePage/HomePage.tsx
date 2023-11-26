@@ -1,14 +1,14 @@
 import React from "react";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
-
-import styles from "./HomePage.module.scss";
+import Slider from "./Slider";
 
 const HomePage = () => {
   return (
     <div>
       <Header />
-      <Footer/>
+      <Slider />
+      <Footer />
     </div>
   );
 };

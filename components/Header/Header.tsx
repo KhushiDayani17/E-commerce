@@ -272,7 +272,7 @@ const beautyCategories = [
 const Header = () => {
   return (
     <>
-      <nav className="flex relative bg-white border-b-2 border-gray-300 text-gray-900">
+      <nav className="flex relative bg-white border-b-2 border-gray-300 text-gray-900 w-full">
         <div className="container mx-auto flex justify-between items-center">
           <div className="relative block p-4 lg:p-6 text-xl text-teal-600 font-bold">
             <a href="#" className="text-teal-900">
