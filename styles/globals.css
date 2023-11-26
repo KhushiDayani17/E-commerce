@@ -16,6 +16,7 @@
   text-align: left;
   width: 100%;
   border-top: 2px solid rgb(209 213 219 / var(--tw-border-opacity));
+  z-index: 1;
 }
 
 /* #hoverable Class Styles
