@@ -1,594 +1,466 @@
 import React, { useState } from "react";
 
+const MenCategories = [
+  {
+    title: "T-Shirts",
+    items: [
+      "T-Shirts",
+      "Casual Shirts",
+      "Formal Shirts",
+      "Sweatshirts",
+      "Sweaters",
+      "Jackets",
+      "Blazers & Coats",
+      "Sweaters",
+    ],
+  },
+  {
+    title: "Bottomwear",
+    items: [
+      "Jeans",
+      "Casual Trousers",
+      "Formal Trousers",
+      "Shorts",
+      "Track pants & Joggers",
+    ],
+  },
+  {
+    title: "Footwear",
+    items: [
+      "Casual Shoes",
+      "Sports Shoes",
+      "Formal Shoes",
+      "Sneakers",
+      "Sandals & Floaters",
+      "Flip Flops",
+      "Socks",
+    ],
+  },
+  {
+    title: "Fashion Accessories",
+    items: [
+      "Wallets",
+      "Bets",
+      "Perfumes & Body Mists",
+      "Trimmers",
+      "Deodorants",
+      "Ties, Cufflinks & Pockets Squares",
+      "Accessory Gift Sets",
+      "Caps & Hats",
+      "Mufflers, Scarves & Gloves",
+      "Phone Cases",
+      "Rings & Wristwear",
+      "Helmets",
+    ],
+  },
+];
+
+const WomenCategories = [
+  {
+    title: "Indian & Fusion Wear",
+    items: [
+      "Kurtas & Suits",
+      "Kurties, Tunics & Tops",
+      "Sarees",
+      "Ethnic Wear",
+      "Leggings, Salwars & Churidars",
+      "Skirts & Palazzos",
+      "Dress Materials",
+      "Lehenga Cholis",
+      "Dupattas & Shawls",
+      "Jackets",
+    ],
+  },
+  {
+    title: "Western Wear",
+    items: [
+      "Dresses",
+      "Tops",
+      "Tshirts",
+      "Jeans",
+      "Trousers & Capris",
+      "Shorts & Skirts",
+      "Co-ords",
+      "Playsuits",
+      "Jumpsuits",
+      "Shrugs",
+      "Sweaters & Sweatshirts",
+      "Jackets & Coats",
+      "Blazers & Waitstcoats",
+    ],
+  },
+  {
+    title: "Footwear",
+    items: [
+      "Flats",
+      "Casual Shoes",
+      "Heels",
+      "Boots",
+      "Sports Shoes & Floaters",
+    ],
+  },
+  {
+    title: "Jewellery",
+    items: ["Makeup", "Skincare", "Premium Beauty", "Lipsticks", "Fragrances"],
+  },
+];
+
+const KidsCategories = [
+  {
+    title: "Boys Clothing",
+    items: [
+      "T-Shirts",
+      "Shirts",
+      "Shorts",
+      "Jeans",
+      "Trousers",
+      "Clothing Sets",
+      "Ethnic Wear",
+      "Track Pants & Pyjamas",
+      "Jacket, Sweater & Sweatshirts",
+      "Party Wear",
+      "InnerWear & Thermals",
+      "Nightwear & Loungewear",
+      "Value Packs",
+    ],
+  },
+  {
+    title: "Girls Clothing",
+    items: [
+      "Dresses",
+      "Tops",
+      "Tshirts",
+      "Jeans",
+      "Clothing Sets",
+      "Lehenga choli",
+      "Kurta Sets",
+      "Party wear",
+      "Dungarees & Jumpsuits",
+      "Skirts & shorts",
+      "Tights & Leggings",
+      "Jeans, Trousers & Capris",
+      "jacket, Sweater & Sweatshirts",
+      "Innerwear & Thermals",
+      "Nightwear & Loungewear",
+      "Value Packs",
+    ],
+  },
+  {
+    title: "Footwear",
+    items: [
+      "Casual Shoes",
+      "Flipflops",
+      "Sports Shoes",
+      "Flats",
+      "Sandals",
+      "Heels",
+      "School Shoes",
+      "Socks",
+    ],
+  },
+  {
+    title: "Kids Accessories",
+    items: [
+      "Bags & Backpacks",
+      "Watches",
+      "Jewellery & Hair accessory",
+      "Sunglasses",
+      "Masks & Protective Gears",
+      "Caps & Hats",
+    ],
+  },
+];
+
+const furnitureCategories = [
+  {
+    title: "Living Room Furniture",
+    items: [
+      "Sofa Beds",
+      "Sofa Sets",
+      "L-Shaped Sofas",
+      "Recliners",
+      "Tv & Entertainment Units",
+      "Center Tables",
+      "Nested Tables",
+      "Chairs",
+      "Shoe Racks",
+      "Bean Bags",
+      "Wall Shelves",
+      "Magazine Racks",
+    ],
+  },
+  {
+    title: "Bedroom Furniture",
+    items: [
+      "Beds",
+      "Mattresses",
+      "Wardrobes",
+      "Bedside Tables",
+      "Dressing Tables",
+      "Chest Of Drawers",
+    ],
+  },
+  {
+    title: "Kitchen & Dining",
+    items: [
+      "Dining Table Sets",
+      "Dining Tables",
+      "Dining Chairs",
+      "Dining Bench",
+      "Kitchen Cabinets",
+    ],
+  },
+  {
+    title: "Study Room Furniture",
+    items: ["Desks", "Office Chairs", "Bookcases"],
+  },
+];
+
+const beautyCategories = [
+  {
+    title: "Makeup",
+    items: [
+      "Lipstick",
+      "Lip Gloss",
+      "Lip Liner",
+      "Mascara",
+      "Eyeliner",
+      "Kajal",
+      "Eyeshadow",
+      "Foundation",
+      "Primer",
+      "Concealer",
+      "Compact",
+      "Nail Polish",
+    ],
+  },
+  {
+    title: "Skincare, Bath & Body",
+    items: [
+      "Face Moisturiser",
+      "Cleanser",
+      "Masks & Peel",
+      "Sunscreen",
+      "Serum",
+      "Face Wash",
+      "Eye Cream",
+      "Lip Balm",
+      "Body Lotion",
+      "Body Wash",
+      "Body Scrub",
+      "Hand Cream",
+    ],
+  },
+  {
+    title: "Haircare",
+    items: [
+      "Shampoo",
+      "Conditioner",
+      "Hair Cream",
+      "Hair Oil",
+      "Hair gel",
+      "Hair Color",
+      "Hair Serum",
+      "Hair Accessory",
+    ],
+  },
+  {
+    title: "Fragrances",
+    items: ["Perfume", "Deodorant", "Body Mist"],
+  },
+];
 const Header = () => {
   return (
     <>
       <nav className="flex relative bg-white border-b-2 border-gray-300 text-gray-900">
-        <div className="container mx-auto flex justify-between">
+        <div className="container mx-auto flex justify-between items-center">
           <div className="relative block p-4 lg:p-6 text-xl text-teal-600 font-bold">
-            <a href="#" className="hover:text-teal-900">
-              Logo
+            <a href="#" className="text-teal-900">
+              Shopsurf
             </a>
           </div>
+          <ul className="flex">
+            <li className="hoverable">
+              <a
+                href="#"
+                className="relative block py-6 px-4 lg:p-6 text-sm lg:text-base font-bold"
+              >
+                Men
+              </a>
+              <div className="p-6 mega-menu mb-16 sm:mb-0 shadow-xl bg-white">
+                <div className="grid grid-cols-4 gap-4">
+                  {MenCategories.map((category, index) => (
+                    <div key={index}>
+                      <h3 className="text-lg font-semibold mb-2">
+                        {category.title}
+                      </h3>
+                      <ul>
+                        {category.items.map((item, itemIndex) => (
+                          <li
+                            key={itemIndex}
+                            className="hover:text-black hover:font-semibold cursor-pointer mb-2"
+                          >
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </li>
+            <li className="hoverable">
+              <a
+                href="#"
+                className="relative block py-6 px-4 lg:p-6 text-sm lg:text-base font-bold"
+              >
+                Women
+              </a>
+              <div className="p-6 mega-menu mb-16 sm:mb-0 shadow-xl bg-white">
+                <div className="grid grid-cols-4 gap-4">
+                  {WomenCategories.map((category, index) => (
+                    <div key={index}>
+                      <h3 className="text-lg font-semibold mb-2">
+                        {category.title}
+                      </h3>
+                      <ul>
+                        {category.items.map((item, itemIndex) => (
+                          <li
+                            key={itemIndex}
+                            className="hover:text-black hover:font-semibold cursor-pointer mb-2"
+                          >
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </li>
+            <li className="hoverable">
+              <a
+                href="#"
+                className="relative block py-6 px-4 lg:p-6 text-sm lg:text-base font-bold"
+              >
+                Kids
+              </a>
+              <div className="p-6 mega-menu mb-16 sm:mb-0 shadow-xl bg-white">
+                <div className="grid grid-cols-4 gap-4">
+                  {KidsCategories.map((category, index) => (
+                    <div key={index}>
+                      <h3 className="text-lg font-semibold mb-2">
+                        {category.title}
+                      </h3>
+                      <ul>
+                        {category.items.map((item, i) => (
+                          <li
+                            key={i}
+                            className="hover:text-black hover:font-semibold cursor-pointer mb-2"
+                          >
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </li>
+            <li className="hoverable">
+              <a
+                href="#"
+                className="relative block py-6 px-4 lg:p-6 text-sm lg:text-base font-bold"
+              >
+                Furniture
+              </a>
+              <div className="p-6 mega-menu mb-16 sm:mb-0 shadow-xl bg-white">
+                <div className="grid grid-cols-4 gap-4">
+                  {furnitureCategories.map((category, index) => (
+                    <div key={index}>
+                      <h3 className="text-lg font-semibold mb-2">
+                        {category.title}
+                      </h3>
+                      <ul>
+                        {category.items.map((item, i) => (
+                          <li
+                            key={i}
+                            className="hover:text-black hover:font-semibold cursor-pointer mb-2"
+                          >
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </li>
+            <li className="hoverable">
+              <a
+                href="#"
+                className="relative block py-6 px-4 lg:p-6 text-sm lg:text-base font-bold"
+              >
+                Beauty
+              </a>
+              <div className="p-6 mega-menu mb-16 sm:mb-0 shadow-xl bg-white">
+                <div className="grid grid-cols-4 gap-4">
+                  {beautyCategories.map((category, index) => (
+                    <div key={index}>
+                      <h3 className="text-lg font-semibold mb-2">
+                        {category.title}
+                      </h3>
+                      <ul>
+                        {category.items.map((item, i) => (
+                          <li
+                            key={i}
+                            className="hover:text-black hover:font-semibold cursor-pointer mb-2"
+                          >
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </li>
+          </ul>
+          <div className="flex gap-6 relative block p-4 lg:p-6 text-xl font-bold">
+            <div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                className="w-6 h-6"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"
+                />
+              </svg>
+            </div>
+            <div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                className="w-6 h-6"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
+                />
+              </svg>
+            </div>
+          </div>
         </div>
-        <ul className="flex">
-          <li className="hoverable">
-            <a
-              href="#"
-              className="relative block py-6 px-4 lg:p-6 text-sm lg:text-base font-bold"
-            >
-              Men
-            </a>
-            <div className="p-6 mega-menu mb-16 sm:mb-0 shadow-xl bg-gray-100">
-              <div className="grid grid-cols-4 gap-4">
-                <div>
-                  <h3 className="text-lg font-semibold mb-2">T-Shirts</h3>
-                  <ul>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      T-Shirts
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Casual Shirts
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Formal Shirts
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Sweatshirts
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Sweaters
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Jackets
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Blazers & Coats
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Sweaters
-                    </li>
-                  </ul>
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold mb-2">Bottomwear</h3>
-                  <ul>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Jeans
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Casual Trousers
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Formal Trousers
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Shorts
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Track pants & Joggers
-                    </li>
-                  </ul>
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold mb-2">Footwear</h3>
-                  <ul>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Casual Shoes
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Sports Shoes
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Formal Shoes
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Sneakers
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Sandals & Floaters
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Flip Flops
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Socks
-                    </li>
-                  </ul>
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold mb-2">
-                    Fashion Accessories
-                  </h3>
-                  <ul>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Wallets
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Bets
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Perfumes & Body Mists
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Trimmers
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Deodorants
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Ties, Cufflinks & Pockets Squares
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Accessory Gift Sets
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Caps & Hats
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Mufflers, Scarves & Gloves
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Phone Cases
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Rings & Wristwear
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Helmets
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </li>
-          <li className="hoverable">
-            <a
-              href="#"
-              className="relative block py-6 px-4 lg:p-6 text-sm lg:text-base font-bold"
-            >
-              Women
-            </a>
-            <div className="p-6 mega-menu mb-16 sm:mb-0 shadow-xl bg-gray-100">
-              <div className="grid grid-cols-4 gap-4">
-                <div>
-                  <h3 className="text-lg font-semibold mb-2">
-                    Indian & Fusion Wear
-                  </h3>
-                  <ul>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Kurtas & Suits
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Kurties, Tunics & Tops
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Sarees
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Ethnic Wear
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Leggings, Salwars & Churidars
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Skirts & Palazzos
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Dress Materials
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Lehenga Cholis
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Dupattas & Shawls
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Jackets
-                    </li>
-                  </ul>
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold mb-2">Western Wear</h3>
-                  <ul>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Dresses
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Tops
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Tshirts
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Jeans
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Trousers & Capris
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Shorts & Skirts
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Co-ords
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Playsuits
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Jumpsuits
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Shrugs
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Sweaters & Sweatshirts
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Jackets & Coats
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Blazers & Waitstcoats
-                    </li>
-                  </ul>
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold mb-2">Footwear</h3>
-                  <ul>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Flats
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Casual Shoes
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Heels
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Boots
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Sports Shoes & Floaters
-                    </li>
-                  </ul>
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold mb-2">Jewellery</h3>
-                  <ul>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Makeup
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Skincare
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Premium Beauty
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Lipsticks
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Fragrances
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </li>
-          <li className="hoverable">
-            <a
-              href="#"
-              className="relative block py-6 px-4 lg:p-6 text-sm lg:text-base font-bold"
-            >
-              Kids
-            </a>
-            <div className="p-6 mega-menu mb-16 sm:mb-0 shadow-xl bg-gray-100">
-              <div className="grid grid-cols-4 gap-4">
-                <div>
-                  <h3 className="text-lg font-semibold mb-2">Boys Clothing</h3>
-                  <ul>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      T-Shirts
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Shirts
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Shorts
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Jeans
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Trousers
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Clothing Sets
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Ethnic Wear
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Track Pants & Pyjamas
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Jacket, Sweater & Sweatshirts
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Party Wear
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      InnerWear & Thermals
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Nightwear & Loungewear
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Value Packs
-                    </li>
-                  </ul>
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold mb-2">Girls Clothing</h3>
-                  <ul>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Dresses
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Tops
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Tshirts
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Jeans
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Clothing Sets
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Lehenga choli
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Kurta Sets
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Party wear
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Dungarees & Jumpsuits
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Skirts & shorts
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Tights & Leggings
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Jeans, Trousers & Capris
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      jacket, Sweater & Sweatshirts
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Innerwear & Thermals
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Nightwear & Loungewear
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Value Packs
-                    </li>
-                  </ul>
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold mb-2">Footwear</h3>
-                  <ul>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Casual Shoes
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Flipflops
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Sports Shoes
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Flats
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Sandals
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Heels
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      School Shoes
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Socks
-                    </li>
-                  </ul>
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold mb-2">
-                    Kids Accessories
-                  </h3>
-                  <ul>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Bags & Backpacks
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Watches
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Jewellery & Hair accessory
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Sunglasses
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Masks & Protective Gears
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Caps & Hats
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </li>
-          <li className="hoverable">
-            <a
-              href="#"
-              className="relative block py-6 px-4 lg:p-6 text-sm lg:text-base font-bold"
-            >
-              Fashion
-            </a>
-            <div className="p-6 mega-menu mb-16 sm:mb-0 shadow-xl bg-teal-700">
-              {/* Mega Menu Content */}
-            </div>
-          </li>
-          <li className="hoverable">
-            <a
-              href="#"
-              className="relative block py-6 px-4 lg:p-6 text-sm lg:text-base font-bold"
-            >
-              Beauty
-            </a>
-            <div className="p-6 mega-menu mb-16 sm:mb-0 shadow-xl bg-gray-100">
-              <div className="grid grid-cols-4 gap-4">
-                <div>
-                  <h3 className="text-lg font-semibold mb-2">Makeup</h3>
-                  <ul>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Lipstick
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Lip Gloss
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Lip Liner
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Mascara
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Eyeliner
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Kajal
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Eyeshadow
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Foundation
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Primer
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Concealer
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Compact
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Nail Polish
-                    </li>
-                  </ul>
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold mb-2">
-                    Skincare, Bath & Body
-                  </h3>
-                  <ul>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Face Moisturiser
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Cleanser
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Tshirts
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Jeans
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Trousers & Capris
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Shorts & Skirts
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Co-ords
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Playsuits
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Jumpsuits
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Shrugs
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Sweaters & Sweatshirts
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Jackets & Coats
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Blazers & Waitstcoats
-                    </li>
-                  </ul>
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold mb-2">Footwear</h3>
-                  <ul>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Flats
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Casual Shoes
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Heels
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Boots
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Sports Shoes & Floaters
-                    </li>
-                  </ul>
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold mb-2">Jewellery</h3>
-                  <ul>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Makeup
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Skincare
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Premium Beauty
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Lipsticks
-                    </li>
-                    <li className="hover:text-black hover:font-semibold cursor-pointer">
-                      Fragrances
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </li>
-        </ul>
       </nav>
     </>
   );
