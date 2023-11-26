@@ -298,7 +298,7 @@ const Header = () => {
                         {category.items.map((item, itemIndex) => (
                           <li
                             key={itemIndex}
-                            className="hover:text-black hover:font-semibold cursor-pointer"
+                            className="hover:text-black hover:font-semibold cursor-pointer mb-2"
                           >
                             {item}
                           </li>
@@ -327,7 +327,7 @@ const Header = () => {
                         {category.items.map((item, itemIndex) => (
                           <li
                             key={itemIndex}
-                            className="hover:text-black hover:font-semibold cursor-pointer"
+                            className="hover:text-black hover:font-semibold cursor-pointer mb-2"
                           >
                             {item}
                           </li>
@@ -356,7 +356,7 @@ const Header = () => {
                         {category.items.map((item, i) => (
                           <li
                             key={i}
-                            className="hover:text-black hover:font-semibold cursor-pointer"
+                            className="hover:text-black hover:font-semibold cursor-pointer mb-2"
                           >
                             {item}
                           </li>
@@ -385,7 +385,7 @@ const Header = () => {
                         {category.items.map((item, i) => (
                           <li
                             key={i}
-                            className="hover:text-black hover:font-semibold cursor-pointer"
+                            className="hover:text-black hover:font-semibold cursor-pointer mb-2"
                           >
                             {item}
                           </li>
@@ -414,7 +414,7 @@ const Header = () => {
                         {category.items.map((item, i) => (
                           <li
                             key={i}
-                            className="hover:text-black hover:font-semibold cursor-pointer"
+                            className="hover:text-black hover:font-semibold cursor-pointer mb-2"
                           >
                             {item}
                           </li>
