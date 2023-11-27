@@ -4,7 +4,7 @@ import { IProductPayload } from "../../@types/apis/IProduct";
 import { useDispatch, useSelector } from "react-redux";
 import { productAction } from "../../redux/features/productSlice";
 import { selectCart } from "../../redux/selectors/productSelector";
-import Link from "next/link";
+import router from "next/router";
 
 const Product = () => {
   const [products, setProducts] = useState<IProductPayload[]>([]);
@@ -26,7 +26,9 @@ const Product = () => {
   const handleAddToCart = (product: IProductPayload) => {
     dispatch(productAction.addToCart(product));
   };
-
+  const handleProductClick = (productId: number) => {
+    router.push(`/product_detail?id=${productId}`);
+  };
   return (
     <div>
       <h3 className="flex justify-center text-3xl p-6 font-semibold uppercase">
@@ -37,24 +39,25 @@ const Product = () => {
         {products.length > 0 ? (
           products.map((product) => (
             <div
+              onClick={() => handleProductClick(product.id)}
               key={product.id}
               className="relative m-10 flex w-full max-w-xs flex-col overflow-hidden rounded-lg border border-gray-100 bg-white shadow-md"
             >
-              <Link
-                href="/product_detail"
+              <a
+                // href="/product_detail"
                 className="relative mx-3 mt-3 flex h-60 overflow-hidden rounded-xl flex justify-center"
               >
                 <img src={product.image} />
                 <span className="absolute top-0 left-0 m-2 rounded-full bg-black px-2 text-center text-sm font-medium text-white">
                   {/* {product.discountPercent}% OFF */}
                 </span>
-              </Link>
+              </a>
               <div className="mt-4 px-5 pb-5">
-                <Link href="/product_detail">
+                <a>
                   <h5 className="text-xl tracking-tight text-slate-900">
                     {product.title}
                   </h5>
-                </Link>
+                </a>
                 <div className="mt-2 mb-5 flex items-center justify-between">
                   <p>
                     <span className="text-3xl font-bold text-slate-900">
@@ -62,8 +65,6 @@ const Product = () => {
                     </span>
                   </p>
                   <div className="flex items-center">
-                    {/* Your rating stars and average rating logic here */}
-                    {/* For simplicity, I'll add a static 5.0 rating */}
                     <span className="mr-2 ml-3 rounded bg-yellow-200 px-2.5 py-0.5 text-xs font-semibold">
                       {product.rating.rate}
                     </span>

@@ -1,9 +1,31 @@
-import React, { useState } from "react";
-import Header from "../Header/Header";
-import Footer from "../Footer/Footer";
-
+import React, { useState, useEffect } from "react";
+import { AxiosResponse } from "axios";
+import { IProductDetailPayload } from "../../@types/apis/IProduct";
+import AuthApiServices from "../../helpers/apis/authProductApiServices";
+import { useRouter } from "next/router";
 const ProductDetail = () => {
   const [quantity, setQuantity] = useState(0);
+  const [productDetails, setProductDetails] =
+    useState<IProductDetailPayload | null>(null);
+  const router = useRouter();
+
+  useEffect(() => {
+    const fetchProductDetails = async () => {
+      try {
+        const productIdFromUrl = router.query.id;
+        if (!productIdFromUrl) {
+          return;
+        }
+        const productId = parseInt(productIdFromUrl as string, 10);
+        const response = await AuthApiServices.productDetail(productId);
+        setProductDetails(response.data as any);
+      } catch (error) {
+        console.error("Error fetching product details:", error);
+      }
+    };
+
+    fetchProductDetails();
+  }, [router.query.id]);
 
   const handleIncrement = () => {
     setQuantity((prevQuantity) => prevQuantity + 1);
@@ -14,38 +36,36 @@ const ProductDetail = () => {
       setQuantity((prevQuantity) => prevQuantity - 1);
     }
   };
+
   return (
     <div>
       <section className="pt-10 font-poppins dark:bg-gray-800">
         <div className="max-w-6xl px-4 mx-auto">
           <div className="flex flex-wrap mb-24 -mx-4">
             <div className="w-full px-4 mb-8 md:w-1/2 md:mb-0">
-              <div className="sticky top-0 overflow-hidden ">
+              <div className="sticky top-0 overflow-hidden">
                 <div className="relative mb-6 lg:mb-10">
                   <img
                     className="object-contain w-full lg:h-full"
-                    src="./static/images/women-cashmere-a4.jpg.webp"
-                    alt=""
+                    src={productDetails?.image || ""}
+                    alt={productDetails?.title || ""}
                   />
                 </div>
               </div>
             </div>
             <div className="w-full px-4 md:w-1/2">
               <div className="lg:pl-20">
-                <div className="mb-6 ">
+                <div className="mb-6">
                   <h2 className="max-w-xl mt-6 mb-6 text-xl font-semibold leading-loose tracking-wide text-gray-700 md:text-2xl dark:text-gray-300">
-                    Intel® Core™ i5-12600HX Processor (18M Cache, up to 4.60
-                    GHz)
+                    {productDetails?.title}
                   </h2>
                   <p className="max-w-md mb-8 text-gray-700 dark:text-gray-400">
-                    Lorem ispum dor amet Lorem ispum dor amet Lorem ispum dor
-                    amet Lorem ispum dor amet Lorem ispum dor amet Lorem ispum
-                    dor amet Lorem ispum dor amet Lorem ispum dor amet
+                    {productDetails?.description}
                   </p>
-                  <p className="inline-block text-2xl font-semibold text-gray-700 dark:text-gray-400 ">
-                    <span>Rs.7,000.00</span>
+                  <p className="inline-block text-2xl font-semibold text-gray-700 dark:text-gray-400">
+                    <span>{`Rs.${productDetails?.price}`}</span>
                     <span className="ml-3 text-base font-normal text-gray-500 line-through dark:text-gray-400">
-                      Rs.10,000.00
+                      {/* You may want to add original price here */}
                     </span>
                   </p>
                 </div>
@@ -59,7 +79,7 @@ const ProductDetail = () => {
                     </span>
                   </p>
                 </div>
-                <div className="mb-6 "></div>
+                <div className="mb-6"></div>
                 <div className="flex flex-wrap items-center mb-6">
                   <div className="mb-4 mr-4 lg:mb-0">
                     <div className="w-28">
