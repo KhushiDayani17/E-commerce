@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import AuthApiServices from "../../helpers/apis/authProductApiServices";
 import { IProductPayload } from "../../@types/apis/IProduct";
+import { useDispatch, useSelector } from "react-redux";
+import { productAction } from "../../redux/features/productSlice";
+import { selectCart } from "../../redux/selectors/productSelector";
 
 const Product = () => {
   const [products, setProducts] = useState<IProductPayload[]>([]);
-  console.log(products);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -18,6 +21,10 @@ const Product = () => {
 
     fetchData();
   }, []);
+
+  const handleAddToCart = (product: IProductPayload) => {
+    dispatch(productAction.addToCart(product));
+  };
 
   return (
     <div>
@@ -62,8 +69,8 @@ const Product = () => {
                   </div>
                 </div>
                 <a
-                  href="#"
-                  className="flex items-center justify-center rounded-md bg-slate-900 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-blue-300"
+                  onClick={() => handleAddToCart(product)}
+                  className="flex items-center justify-center rounded-md bg-slate-900 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-blue-300 cursor-pointer"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
