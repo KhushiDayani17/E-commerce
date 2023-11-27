@@ -274,7 +274,6 @@ const beautyCategories = [
 const Header = () => {
   const cartItem = useSelector(selectCart);
   const count = cartItem.items.length;
-  console.log(cartItem);
 
   return (
     <>
