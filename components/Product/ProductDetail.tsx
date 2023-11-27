@@ -16,7 +16,6 @@ const ProductDetail = () => {
   };
   return (
     <div>
-      <Header />
       <section className="pt-10 font-poppins dark:bg-gray-800">
         <div className="max-w-6xl px-4 mx-auto">
           <div className="flex flex-wrap mb-24 -mx-4">
@@ -113,7 +112,6 @@ const ProductDetail = () => {
           </div>
         </div>
       </section>
-      <Footer />
     </div>
   );
 };
