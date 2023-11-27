@@ -1,17 +1,15 @@
 import React, { useState } from "react";
+import Header from "../Header/Header";
+import Footer from "../Footer/Footer";
 
-const Product = () => {
-  // State to manage the quantity
+const ProductDetail = () => {
   const [quantity, setQuantity] = useState(0);
 
-  // Function to handle incrementing the quantity
   const handleIncrement = () => {
     setQuantity((prevQuantity) => prevQuantity + 1);
   };
 
-  // Function to handle decrementing the quantity
   const handleDecrement = () => {
-    // Ensure quantity does not go below 1
     if (quantity > 0) {
       setQuantity((prevQuantity) => prevQuantity - 1);
     }
@@ -118,4 +116,4 @@ const Product = () => {
   );
 };
 
-export default Product;
+export default ProductDetail;

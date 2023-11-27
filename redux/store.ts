@@ -1,8 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { persistedReducer } from "./features/persistedRootReducer";
+// import { persistedReducer } from "./features/persistedRootReducer";
+import { rootReducer } from "./features/rootReducer";
 
 export const store = configureStore({
-  reducer: persistedReducer,
+  reducer: rootReducer,
 });
 
 export type RootState = ReturnType<typeof store.getState>;
