@@ -4,7 +4,7 @@ import { IProductDetailPayload } from "../../@types/apis/IProduct";
 import AuthApiServices from "../../helpers/apis/authProductApiServices";
 import { useRouter } from "next/router";
 const ProductDetail = () => {
-  const [quantity, setQuantity] = useState(0);
+  const [quantity, setQuantity] = useState(1);
   const [productDetails, setProductDetails] =
     useState<IProductDetailPayload | null>(null);
   const router = useRouter();
@@ -32,7 +32,7 @@ const ProductDetail = () => {
   };
 
   const handleDecrement = () => {
-    if (quantity > 0) {
+    if (quantity > 1) {
       setQuantity((prevQuantity) => prevQuantity - 1);
     }
   };

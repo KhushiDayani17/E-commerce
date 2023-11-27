@@ -39,12 +39,11 @@ const Product = () => {
         {products.length > 0 ? (
           products.map((product) => (
             <div
-              onClick={() => handleProductClick(product.id)}
               key={product.id}
               className="relative m-10 flex w-full max-w-xs flex-col overflow-hidden rounded-lg border border-gray-100 bg-white shadow-md"
             >
               <a
-                // href="/product_detail"
+                onClick={() => handleProductClick(product.id)}
                 className="relative mx-3 mt-3 flex h-60 overflow-hidden rounded-xl flex justify-center"
               >
                 <img src={product.image} />
@@ -54,7 +53,10 @@ const Product = () => {
               </a>
               <div className="mt-4 px-5 pb-5">
                 <a>
-                  <h5 className="text-xl tracking-tight text-slate-900">
+                  <h5
+                    className="text-xl tracking-tight text-slate-900 cursor-pointer"
+                    onClick={() => handleProductClick(product.id)}
+                  >
                     {product.title}
                   </h5>
                 </a>
