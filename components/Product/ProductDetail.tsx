@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import Header from "../Header/Header";
-import Footer from "../Footer/Footer";
 
 const ProductDetail = () => {
   const [quantity, setQuantity] = useState(0);
