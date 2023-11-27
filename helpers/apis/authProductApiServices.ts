@@ -4,14 +4,8 @@ import { jsonToForm } from "../helper";
 import { axiosAuthInstance } from "../axois";
 
 class AuthApiServices {
-  static getproduct = async (page: number): Promise<AxiosResponse<any>> => {
-    try {
-      const limit = 6;
-      const response = await axiosAuthInstance.get(`/products?limit=${limit}`);
-      return response;
-    } catch (error) {
-      throw error;
-    }
+  static getproduct = async (): Promise<AxiosResponse<AxiosResponse<any>>> => {
+    return await axiosAuthInstance.get("/products");
   };
 }
 
