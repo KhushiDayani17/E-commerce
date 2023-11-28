@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { selectCart } from "../../redux/selectors/productSelector";
 import { useSelector } from "react-redux";
+import Link from "next/link";
 
 const MenCategories = [
   {
@@ -449,6 +450,7 @@ const Header = () => {
               </svg>
             </div>
             <div>
+              <Link href="/cart">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -468,6 +470,8 @@ const Header = () => {
                   {count}
                 </div>
               )}
+              </Link>
+              
             </div>
           </div>
         </div>

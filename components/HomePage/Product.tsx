@@ -24,8 +24,8 @@ const Product = () => {
   }, []);
 
   const handleAddToCart = (product: IProductPayload) => {
-    dispatch(productAction.addToCart(product));
-  };
+    dispatch(productAction.addToCart({ product, quantity: 1 }));
+    };
   const handleProductClick = (productId: number) => {
     router.push(`/product_detail?id=${productId}`);
   };

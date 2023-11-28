@@ -14,10 +14,19 @@ export const productSlice = createSlice({
   initialState,
   reducers: {
     addToCart: (state, action: PayloadAction<any>) => {
+      const { product, quantity } = action.payload;
       const newItem = {
-        ...action.payload,
+        ...product,
+        quantity: quantity || 1,
       };
-      state.items = [...state.items, newItem];
+
+      const existingItem = state.items.find((item) => item.id === newItem.id);
+
+      if (existingItem) {
+        existingItem.quantity += newItem.quantity;
+      } else {
+        state.items.push(newItem);
+      }
     },
   },
 });

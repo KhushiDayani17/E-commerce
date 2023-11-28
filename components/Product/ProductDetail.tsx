@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { AxiosResponse } from "axios";
-import { IProductDetailPayload } from "../../@types/apis/IProduct";
+import {
+  IProductDetailPayload,
+  IProductPayload,
+} from "../../@types/apis/IProduct";
 import AuthApiServices from "../../helpers/apis/authProductApiServices";
 import { useRouter } from "next/router";
+import { useDispatch, useSelector } from "react-redux";
+import { productAction } from "../../redux/features/productSlice";
 const ProductDetail = () => {
+  const dispatch = useDispatch();
   const [quantity, setQuantity] = useState(1);
   const [productDetails, setProductDetails] =
     useState<IProductDetailPayload | null>(null);
@@ -36,7 +42,9 @@ const ProductDetail = () => {
       setQuantity((prevQuantity) => prevQuantity - 1);
     }
   };
-
+  const handleAddToCart = (product: IProductPayload) => {
+    dispatch(productAction.addToCart({ product, quantity: 1 }));
+  };
   return (
     <div>
       <section className="pt-10 font-poppins dark:bg-gray-800">
@@ -107,7 +115,7 @@ const ProductDetail = () => {
                 </div>
                 <div className="flex gap-4 mb-6">
                   <a
-                    href="#"
+                    onClick={() => handleAddToCart(productDetails as any)}
                     className="flex items-center justify-center w-full px-4 py-3 text-center text-gray-100 bg-slate-900 border border-transparent dark:border-gray-700 hover:border-blue-500 hover:text-white hover:bg-gray-700 dark:text-gray-400 dark:bg-gray-700 dark:hover:bg-gray-900"
                   >
                     <svg
