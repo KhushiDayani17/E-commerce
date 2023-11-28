@@ -33,7 +33,7 @@ const CartDetail = () => {
                   <img
                     src={item?.image || ""}
                     alt="product-image"
-                    className="w-full h-18 rounded-lg sm:w-40"
+                    className="w-full rounded-lg sm:w-20 sm:h-20"
                   />
                   <div className="sm:ml-4 sm:flex sm:w-full sm:justify-between">
                     <div className="mt-5 sm:mt-0">
