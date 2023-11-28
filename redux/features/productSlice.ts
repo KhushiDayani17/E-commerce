@@ -2,6 +2,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface CartState {
+  [x: string]: any;
   items: any[];
 }
 
@@ -27,6 +28,10 @@ export const productSlice = createSlice({
       } else {
         state.items.push(newItem);
       }
+    },
+    removeItemFromCart: (state, action: PayloadAction<string>) => {
+      const itemIdToRemove = action.payload;
+      state.items = state.items.filter((item) => item.id !== itemIdToRemove);
     },
   },
 });

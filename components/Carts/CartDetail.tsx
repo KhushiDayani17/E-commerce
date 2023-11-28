@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectCart } from "../../redux/selectors/productSelector";
+import { productAction } from "../../redux/features/productSlice";
 
 const CartDetail = () => {
+  const dispatch = useDispatch();
   const cartDetails = useSelector(selectCart);
-  console.log("cartDetails", cartDetails);
 
   const [itemQuantities, setItemQuantities] = useState(
     cartDetails.items.reduce((acc, item) => {
@@ -29,14 +30,21 @@ const CartDetail = () => {
     }
   };
 
+  const total = cartDetails.items.reduce(
+    (acc: any, item: any) => acc + item.price * item.quantity,
+    0
+  );
+
+  const shippingCharge = 4.99;
+  const subtotal = total + shippingCharge;
   return (
     <div className="min-h-screen bg-white pt-20">
       <h1 className="mb-10 text-center text-4xl font-bold">Cart</h1>
       <div className="mx-auto max-w-6xl justify-center px-6 md:flex md:space-x-6 xl:px-0">
         <div className="rounded-lg md:w-2/3">
-          <div>
-            {cartDetails &&
-              cartDetails.items.map((item) => (
+          {cartDetails && cartDetails.items.length > 0 ? (
+            <div>
+              {cartDetails.items.map((item) => (
                 <div
                   key={item.id}
                   className="justify-between mb-6 rounded-lg bg-white p-6 shadow-md sm:flex sm:justify-start"
@@ -79,14 +87,17 @@ const CartDetail = () => {
                         {/* Your quantity buttons and input */}
                       </div>
                       <div className="flex items-center space-x-4">
-                        <p className="text-sm">{item.price} ₭</p>
+                        <p className="text-sm">{item.price}₭</p>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
                           viewBox="0 0 24 24"
                           strokeWidth="1.5"
                           stroke="currentColor"
-                          className="h-5 w-5 cursor-pointer duration-150 hover:text-red-500"
+                          className="h-5 w-5 cursor-pointer duration-150 hover:text-red-500 cursor-pointer"
+                          onClick={() =>
+                            dispatch(productAction.removeItemFromCart(item.id))
+                          }
                         >
                           <path
                             strokeLinecap="round"
@@ -99,7 +110,12 @@ const CartDetail = () => {
                   </div>
                 </div>
               ))}
-          </div>
+            </div>
+          ) : (
+            <p className="text-center text-lg font-semibold mt-8">
+              Your cart is empty.
+            </p>
+          )}
         </div>
         <div className="sticky top-10 mb-6 mt-6 h-full rounded-lg border bg-white p-6 shadow-md md:mt-0 md:w-full md:max-w-xs lg:max-w-md">
           <div className="mb-6 flex justify-center">
@@ -107,7 +123,7 @@ const CartDetail = () => {
           </div>
           <div className="mb-6 flex justify-between">
             <p className="text-gray-700">Subtotal</p>
-            <p className="text-gray-700">$129.99</p>
+            <p className="text-gray-700">${total}</p>
           </div>
           <div className="mb-6 flex justify-between">
             <p className="text-gray-700">Shipping</p>
@@ -117,7 +133,7 @@ const CartDetail = () => {
           <div className="flex justify-between">
             <p className="text-lg font-bold">Total</p>
             <div className="">
-              <p className="mb-4 text-lg font-bold">$134.98 USD</p>
+              <p className="mb-4 text-lg font-bold">${subtotal} USD</p>
               <p className="text-sm text-gray-700">including VAT</p>
             </div>
           </div>

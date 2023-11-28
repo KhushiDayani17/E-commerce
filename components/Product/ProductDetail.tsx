@@ -43,8 +43,9 @@ const ProductDetail = () => {
     }
   };
   const handleAddToCart = (product: IProductPayload) => {
-    dispatch(productAction.addToCart({ product, quantity: 1 }));
+    dispatch(productAction.addToCart({ product, quantity }));
   };
+
   return (
     <div>
       <section className="pt-10 font-poppins dark:bg-gray-800">
