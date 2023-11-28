@@ -3,20 +3,31 @@ import { useSelector } from "react-redux";
 import { selectCart } from "../../redux/selectors/productSelector";
 
 const CartDetail = () => {
-  const [quantity, setQuantity] = useState(0);
-
-  const handleIncrement = () => {
-    setQuantity((prevQuantity) => prevQuantity + 1);
-  };
-
-  const handleDecrement = () => {
-    if (quantity > 0) {
-      setQuantity((prevQuantity) => prevQuantity - 1);
-    }
-  };
-
   const cartDetails = useSelector(selectCart);
   console.log("cartDetails", cartDetails);
+
+  const [itemQuantities, setItemQuantities] = useState(
+    cartDetails.items.reduce((acc, item) => {
+      acc[item.id] = 0;
+      return acc;
+    }, {})
+  );
+
+  const handleIncrement = (itemId:any) => {
+    setItemQuantities((prevQuantities:any) => ({
+      ...prevQuantities,
+      [itemId]: prevQuantities[itemId] + 1,
+    }));
+  };
+
+  const handleDecrement = (itemId:any) => {
+    if (itemQuantities[itemId] > 0) {
+      setItemQuantities((prevQuantities:any) => ({
+        ...prevQuantities,
+        [itemId]: prevQuantities[itemId] - 1,
+      }));
+    }
+  };
 
   return (
     <div className="min-h-screen bg-white pt-20">
@@ -47,18 +58,18 @@ const CartDetail = () => {
                     <div className="mt-4 flex justify-between sm:space-y-6 sm:mt-0 sm:block sm:space-x-6">
                       <div className="flex items-center border-gray-100">
                         <button
-                          onClick={handleDecrement}
+                          onClick={() => handleDecrement(item.id)}
                           className="cursor-pointer rounded-l bg-gray-100 py-1 px-3.5 duration-100 hover:bg-blue-500 hover:text-blue-50"
                         >
                           <span>-</span>
                         </button>
                         <input
                           className="h-8 w-8 border bg-white text-center text-xs outline-none"
-                          value={quantity}
+                          value={itemQuantities[item.id]}
                           min="1"
                         />
                         <button
-                          onClick={handleIncrement}
+                          onClick={() => handleIncrement(item.id)}
                           className="cursor-pointer rounded-r bg-gray-100 py-1 px-3 duration-100 hover:bg-blue-500 hover:text-blue-50"
                         >
                           <span>+</span>
