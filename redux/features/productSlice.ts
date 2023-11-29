@@ -29,6 +29,21 @@ export const productSlice = createSlice({
         state.items.push(newItem);
       }
     },
+    updateQuantity: (state, action) => {
+      console.log("Current state:", state);
+      const { productId, quantity } = action.payload;
+
+      // Ensure that products array is initialized
+      if (!state.products) {
+        state.products = [];
+      }
+
+      const product = state.products.find((p: any) => p.id === productId);
+      if (product) {
+        product.quantity = quantity;
+      }
+    },
+
     removeItemFromCart: (state, action: PayloadAction<string>) => {
       const itemIdToRemove = action.payload;
       state.items = state.items.filter((item) => item.id !== itemIdToRemove);

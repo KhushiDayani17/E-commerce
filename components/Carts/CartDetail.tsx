@@ -2,24 +2,27 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCart } from "../../redux/selectors/productSelector";
 import { productAction } from "../../redux/features/productSlice";
+import { log } from "util";
 
 const CartDetail = () => {
   const dispatch = useDispatch();
   const cartDetails = useSelector(selectCart);
+
   const [itemQuantities, setItemQuantities] = useState(
     cartDetails.items.reduce((acc, item) => {
-      acc[item.id] = 0;
+      acc[item.id] = item.quantity;
       return acc;
     }, {})
   );
   const total = cartDetails.items.reduce(
-    (acc: any, item: any) => acc + item.price * item.quantity,
+    (acc: any, item: any) =>
+      acc + item.price * (itemQuantities[item.id] || item.quantity),
     0
   );
 
   const shippingCharge = 4.99;
   const subtotal = total + shippingCharge;
-
+  const formattedTotal = subtotal.toFixed(2);
   const handleIncrement = (itemId: any) => {
     setItemQuantities((prevQuantities: any) => ({
       ...prevQuantities,
@@ -72,7 +75,7 @@ const CartDetail = () => {
                         </button>
                         <input
                           className="h-8 w-8 border bg-white text-center text-xs outline-none"
-                          value={itemQuantities[item.id]}
+                          value={itemQuantities[item.id] || 0}
                           min="1"
                         />
                         <button
@@ -132,7 +135,9 @@ const CartDetail = () => {
           <div className="flex justify-between">
             <p className="text-lg font-bold">Total</p>
             <div className="">
-              <p className="mb-4 text-lg font-bold">${subtotal} USD</p>
+              <p className="mb-4 text-lg font-bold">
+                ${cartDetails.items.length === 0 ? "0.0" : formattedTotal} USD
+              </p>
               <p className="text-sm text-gray-700">including VAT</p>
             </div>
           </div>

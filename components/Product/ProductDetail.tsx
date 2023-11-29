@@ -34,14 +34,26 @@ const ProductDetail = () => {
   }, [router.query.id]);
 
   const handleIncrement = () => {
-    setQuantity((prevQuantity) => prevQuantity + 1);
+    const newQuantity = quantity + 1;
+    setQuantity(newQuantity);
+    updateQuantityInRedux(newQuantity);
   };
 
   const handleDecrement = () => {
     if (quantity > 1) {
-      setQuantity((prevQuantity) => prevQuantity - 1);
+      const newQuantity = quantity - 1;
+      setQuantity(newQuantity);
+      updateQuantityInRedux(newQuantity);
     }
   };
+
+  const updateQuantityInRedux = (newQuantity: any) => {
+    const productId = parseInt(router.query.id as string, 10);
+    dispatch(
+      productAction.updateQuantity({ productId, quantity: newQuantity })
+    );
+  };
+
   const handleAddToCart = (product: IProductPayload) => {
     dispatch(productAction.addToCart({ product, quantity }));
   };
