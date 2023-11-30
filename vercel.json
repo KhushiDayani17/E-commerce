@@ -1,0 +1,3 @@
+{
+  "builds": [{ "src": "your-build-script.sh", "use": "@vercel/node" }]
+}
