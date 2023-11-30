@@ -29,17 +29,14 @@ export const productSlice = createSlice({
         state.items.push(newItem);
       }
     },
-    updateQuantity: (state, action) => {
-      console.log("Current state:", state);
-      const { productId, quantity } = action.payload;
-
-      if (!state.products) {
-        state.products = [];
-      }
-
-      const product = state.products.find((p: any) => p.id === productId);
-      if (product) {
-        product.quantity = quantity;
+    updateQuantity: (
+      state,
+      action: PayloadAction<{ itemId: string; quantity: number }>
+    ) => {
+      const { itemId, quantity } = action.payload;
+      const item = state.items.find((item) => item.id === itemId);
+      if (item) {
+        item.quantity = quantity;
       }
     },
 

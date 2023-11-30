@@ -33,26 +33,26 @@ const ProductDetail = () => {
     fetchProductDetails();
   }, [router.query.id]);
 
-  const handleIncrement = () => {
-    const newQuantity = quantity + 1;
-    setQuantity(newQuantity);
-    updateQuantityInRedux(newQuantity);
-  };
+  // const handleIncrement = () => {
+  //   const newQuantity = quantity + 1;
+  //   setQuantity(newQuantity);
+  //   updateQuantityInRedux(newQuantity);
+  // };
 
-  const handleDecrement = () => {
-    if (quantity > 1) {
-      const newQuantity = quantity - 1;
-      setQuantity(newQuantity);
-      updateQuantityInRedux(newQuantity);
-    }
-  };
+  // const handleDecrement = () => {
+  //   if (quantity > 1) {
+  //     const newQuantity = quantity - 1;
+  //     setQuantity(newQuantity);
+  //     updateQuantityInRedux(newQuantity);
+  //   }
+  // };
 
-  const updateQuantityInRedux = (newQuantity: any) => {
-    const productId = parseInt(router.query.id as string, 10);
-    dispatch(
-      productAction.updateQuantity({ productId, quantity: newQuantity })
-    );
-  };
+  // const updateQuantityInRedux = (newQuantity: any) => {
+  //   const productId = parseInt(router.query.id as string, 10);
+  //   dispatch(
+  //     productAction.updateQuantity({ productId, quantity: newQuantity })
+  //   );
+  // };
 
   const handleAddToCart = (product: IProductPayload) => {
     dispatch(productAction.addToCart({ product, quantity }));
@@ -98,7 +98,7 @@ const ProductDetail = () => {
                   </p>
                 </div>
                 <div className="mb-6"></div>
-                <div className="flex flex-wrap items-center mb-6">
+                {/* <div className="flex flex-wrap items-center mb-6">
                   <div className="mb-4 mr-4 lg:mb-0">
                     <div className="w-28">
                       <div className="relative flex flex-row w-full h-10 bg-transparent rounded-lg">
@@ -122,7 +122,7 @@ const ProductDetail = () => {
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> */}
                 <div className="flex gap-4 mb-6">
                   <a
                     onClick={() => handleAddToCart(productDetails as any)}

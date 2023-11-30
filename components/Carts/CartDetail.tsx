@@ -21,21 +21,29 @@ const CartDetail = () => {
     setIsCheckingOut(false);
     dispatch(productAction.clearCart());
   };
-
   const total = cartDetails.items.reduce(
     (acc: any, item: any) =>
-      acc + item.price * (itemQuantities[item.id] || item.quantity),
+      acc +
+      parseFloat(
+        (item.price * (itemQuantities[item.id] || item.quantity)).toFixed(2)
+      ),
     0
   );
 
   const shippingCharge = 4.99;
-  const subtotal = total + shippingCharge;
+  const subtotal = parseFloat((total + shippingCharge).toFixed(2));
   const formattedTotal = subtotal.toFixed(2);
   const handleIncrement = (itemId: any) => {
     setItemQuantities((prevQuantities: any) => ({
       ...prevQuantities,
-      [itemId]: prevQuantities[itemId] + 1,
+      [itemId]: (prevQuantities[itemId] || 0) + 1,
     }));
+    dispatch(
+      productAction.updateQuantity({
+        itemId,
+        quantity: itemQuantities[itemId] + 1,
+      })
+    );
   };
 
   const handleDecrement = (itemId: any) => {
@@ -44,6 +52,12 @@ const CartDetail = () => {
         ...prevQuantities,
         [itemId]: prevQuantities[itemId] - 1,
       }));
+      dispatch(
+        productAction.updateQuantity({
+          itemId,
+          quantity: itemQuantities[itemId] - 1,
+        })
+      );
     }
   };
 
@@ -104,7 +118,7 @@ const CartDetail = () => {
                           {/* Your quantity buttons and input */}
                         </div>
                         <div className="flex items-center space-x-4">
-                          <p className="text-sm">{item.price} ₭</p>
+                          <p className="text-sm">{item.price}₭</p>
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
