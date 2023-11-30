@@ -33,7 +33,6 @@ export const productSlice = createSlice({
       console.log("Current state:", state);
       const { productId, quantity } = action.payload;
 
-      // Ensure that products array is initialized
       if (!state.products) {
         state.products = [];
       }
@@ -47,6 +46,9 @@ export const productSlice = createSlice({
     removeItemFromCart: (state, action: PayloadAction<string>) => {
       const itemIdToRemove = action.payload;
       state.items = state.items.filter((item) => item.id !== itemIdToRemove);
+    },
+    clearCart: (state) => {
+      state.items = [];
     },
   },
 });

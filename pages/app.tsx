@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import Home from "../Home/Home";
 import { Provider } from "react-redux";
 import { store } from "../redux/store";
@@ -6,7 +6,9 @@ import { store } from "../redux/store";
 const App = () => {
   return (
     <>
-      <Home />
+      <Suspense fallback={<div></div>}>
+        <Home />
+      </Suspense>
     </>
   );
 };

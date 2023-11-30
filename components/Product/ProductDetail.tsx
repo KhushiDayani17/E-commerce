@@ -85,9 +85,6 @@ const ProductDetail = () => {
                   </p>
                   <p className="inline-block text-2xl font-semibold text-gray-700 dark:text-gray-400">
                     <span>{`Rs.${productDetails?.price}`}</span>
-                    <span className="ml-3 text-base font-normal text-gray-500 line-through dark:text-gray-400">
-                      {/* You may want to add original price here */}
-                    </span>
                   </p>
                 </div>
                 <div className="py-6 mb-6 border-t border-b border-gray-200 dark:border-gray-700">
